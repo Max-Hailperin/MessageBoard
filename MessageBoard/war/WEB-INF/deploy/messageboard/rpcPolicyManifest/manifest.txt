@@ -1,0 +1,2 @@
+# Module messageboard
+# RPC service class, partial path of RPC policy file

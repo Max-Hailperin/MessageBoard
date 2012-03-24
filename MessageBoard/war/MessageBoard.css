@@ -1,0 +1,16 @@
+.messageHeading {
+	font-weight: bold;
+}
+
+.messageBody {
+	margin-bottom: 5pt;
+}
+
+.entryPanel {
+	font-weight: bold;
+}
+
+.gwt-TextBox {
+	margin-left: 5pt;
+	margin-right: 2em;
+}

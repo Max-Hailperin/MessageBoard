@@ -1,0 +1,10 @@
+<!-- Indices written at Sat, 24 Mar 2012 19:02:37 UTC -->
+
+<datastore-indexes>
+
+    <!-- Used 6 times in query history -->
+    <datastore-index kind="Message" ancestor="false" source="auto">
+        <property name="__key__" direction="desc"/>
+    </datastore-index>
+
+</datastore-indexes>

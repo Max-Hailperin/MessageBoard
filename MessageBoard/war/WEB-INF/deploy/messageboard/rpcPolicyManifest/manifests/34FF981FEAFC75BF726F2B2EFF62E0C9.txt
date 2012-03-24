@@ -1,0 +1,2 @@
+serviceClass: edu.gac.mcs270.messageboard.shared.MessageStore
+path: C28E92845D901F54A53CBFAF4FDA276F.gwt.rpc
