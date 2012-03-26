@@ -1,5 +1,6 @@
 package edu.gac.mcs270.messageboard.client;
 
+import java.util.Date;
 import java.util.List;
 
 import edu.gac.mcs270.messageboard.shared.Message;
@@ -20,6 +21,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * User interface for the message board.
@@ -75,9 +77,7 @@ public class MessageBoard implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				messageStore.storeMessage(
-						new Message(
-								authorField.getText(),
-								textField.getText()),
+						new Message(authorField.getText(), textField.getText(), //make a new date object here everytime),		
 						new AsyncCallback<Void>(){
 							@Override
 							public void onFailure(Throwable caught) {
