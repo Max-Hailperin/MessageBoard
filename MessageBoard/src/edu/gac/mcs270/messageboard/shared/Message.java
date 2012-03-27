@@ -8,6 +8,8 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import java.util.Date;
+
 /**
  * A contribution to the message board.
  * @author max
@@ -25,6 +27,9 @@ public class Message implements Serializable{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private Long id;
+	
+	@Persistent
+	private Date Date;
 
 	/**
 	 * @param author the name of the Message's author
@@ -33,8 +38,13 @@ public class Message implements Serializable{
 	public Message(String author, String text) {
 		this.author = author;
 		this.text = text;
+		this.Date = new Date();
 	}
 
+	public String getDate() {
+		return Date.toString();
+	}
+	
 	/**
 	 * @return the name of this Message's author
 	 */

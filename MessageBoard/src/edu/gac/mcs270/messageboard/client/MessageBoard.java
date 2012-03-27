@@ -136,6 +136,8 @@ public class MessageBoard implements EntryPoint {
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
+							Label date = new Label(m.getDate());
+							messagesPanel.insert(date, position++);
 						}
 						if(!result.isEmpty()){
 							nextID = result.get(0).getId() + 1;
