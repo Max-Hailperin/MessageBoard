@@ -1,6 +1,7 @@
 package edu.gac.mcs270.messageboard.client;
 
 import java.util.List;
+import java.util.Date;
 
 import edu.gac.mcs270.messageboard.shared.Message;
 import edu.gac.mcs270.messageboard.shared.MessageStore;
@@ -53,7 +54,7 @@ public class MessageBoard implements EntryPoint {
 		final TextBox textField = new TextBox();
 		entryPanel.add(textLabel);
 		entryPanel.add(textField);
-
+		
 		final Button postButton = new Button("Post");
 		entryPanel.add(postButton);
 		
@@ -77,7 +78,7 @@ public class MessageBoard implements EntryPoint {
 				messageStore.storeMessage(
 						new Message(
 								authorField.getText(),
-								textField.getText()),
+								textField.getText(), new Date()),
 						new AsyncCallback<Void>(){
 							@Override
 							public void onFailure(Throwable caught) {
@@ -130,12 +131,13 @@ public class MessageBoard implements EntryPoint {
 						updatingLabel.setVisible(false);
 						int position = 0;
 						for(Message m : result){
-							Label heading = new Label(m.getAuthor());
+							Label heading = new Label(m.getAuthor() + " - " + m.getDate().toString());
 							heading.addStyleName("messageHeading");
 							messagesPanel.insert(heading, position++);
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
+							
 						}
 						if(!result.isEmpty()){
 							nextID = result.get(0).getId() + 1;

@@ -1,6 +1,7 @@
 package edu.gac.mcs270.messageboard.shared;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -21,6 +22,9 @@ public class Message implements Serializable{
 
 	@Persistent
 	private String text;
+	
+	@Persistent
+	private Date date = new Date();
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -30,9 +34,10 @@ public class Message implements Serializable{
 	 * @param author the name of the Message's author
 	 * @param text the body of the Message
 	 */
-	public Message(String author, String text) {
+	public Message(String author, String text, Date date) {
 		this.author = author;
 		this.text = text;
+		this.date = date;
 	}
 
 	/**
@@ -47,6 +52,13 @@ public class Message implements Serializable{
 	 */
 	public String getText() {
 		return text;
+	}
+	
+	/**
+	 * @return the date of this Message
+	 */
+	public Date getDate() {
+		return date;
 	}
 
 	/**
