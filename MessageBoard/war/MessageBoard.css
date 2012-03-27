@@ -3,7 +3,7 @@
 }
 
 .messageBody {
-	margin-bottom: 5pt;
+/* 	margin-bottom: 5pt; */
 }
 
 .entryPanel {
@@ -13,4 +13,10 @@
 .gwt-TextBox {
 	margin-left: 5pt;
 	margin-right: 2em;
+}
+
+.messageDate { 
+	font-size: 10px; 
+	font-style: italic;
+	margin-bottom: 8pt;
 }
