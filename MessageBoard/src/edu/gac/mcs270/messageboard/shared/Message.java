@@ -7,6 +7,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import java.util.Date;
 
 /**
  * A contribution to the message board.
@@ -25,6 +26,9 @@ public class Message implements Serializable{
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
 	private Long id;
+	
+	@Persistent
+	private Date date;
 
 	/**
 	 * @param author the name of the Message's author
@@ -33,6 +37,7 @@ public class Message implements Serializable{
 	public Message(String author, String text) {
 		this.author = author;
 		this.text = text;
+		this.date = new Date();
 	}
 
 	/**
@@ -54,6 +59,10 @@ public class Message implements Serializable{
 	 */
 	public Long getId() {
 		return id;
+	}
+	
+	public Date getDate() {
+		return date;
 	}
 	
 	// To keep DataNucleus happy we need this:
