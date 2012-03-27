@@ -43,12 +43,12 @@ public class MessageBoard implements EntryPoint {
 		final HorizontalPanel entryPanel = new HorizontalPanel();
 		entryPanel.addStyleName("entryPanel");
 		mainPanel.add(entryPanel);
-		
+
 		final Label authorLabel = new Label("Author:");
 		final TextBox authorField = new TextBox();
 		entryPanel.add(authorLabel);
 		entryPanel.add(authorField);
-		
+
 		final Label textLabel = new Label("Text:");
 		final TextBox textField = new TextBox();
 		entryPanel.add(textLabel);
@@ -56,7 +56,7 @@ public class MessageBoard implements EntryPoint {
 
 		final Button postButton = new Button("Post");
 		entryPanel.add(postButton);
-		
+
 		final HorizontalPanel statusPanel = new HorizontalPanel();
 		statusPanel.setHeight("3em");
 		updatingLabel = new Label("Updating...");
@@ -66,11 +66,11 @@ public class MessageBoard implements EntryPoint {
 		statusPanel.add(updatingLabel);
 		statusPanel.add(failureLabel);
 		mainPanel.add(statusPanel);
-		
+
 		messagesPanel = new VerticalPanel();
 		mainPanel.add(messagesPanel);
 		RootPanel.get("appContent").add(mainPanel);
-		
+
 		postButton.addClickHandler(new ClickHandler(){
 			@Override
 			public void onClick(ClickEvent event) {
@@ -78,7 +78,7 @@ public class MessageBoard implements EntryPoint {
 						new Message(
 								authorField.getText(),
 								textField.getText()),
-						new AsyncCallback<Void>(){
+								new AsyncCallback<Void>(){
 							@Override
 							public void onFailure(Throwable caught) {
 								failureLabel.setVisible(true);
@@ -95,7 +95,7 @@ public class MessageBoard implements EntryPoint {
 				authorField.setFocus(true);
 			}
 		});
-		
+
 		updateMessages();
 		new Timer(){
 			@Override
@@ -103,13 +103,13 @@ public class MessageBoard implements EntryPoint {
 				updateMessages();
 			}
 		}.scheduleRepeating(UPDATE_INTERVAL_MS);
-		
+
 		Element loadingMessage = DOM.getElementById("loadingMessage");
 		loadingMessage.getParentNode().removeChild(loadingMessage);
-		
+
 		authorField.setFocus(true);
 	}
-	
+
 	private void updateMessages(){
 		if(updatingLabel.isVisible()){
 			return;
@@ -119,29 +119,33 @@ public class MessageBoard implements EntryPoint {
 		messageStore.getMessages(nextID,
 				new AsyncCallback<List<Message>>(){
 
-					@Override
-					public void onFailure(Throwable caught) {
-						updatingLabel.setVisible(false);
-						failureLabel.setVisible(true);
-					}
+			@Override
+			public void onFailure(Throwable caught) {
+				updatingLabel.setVisible(false);
+				failureLabel.setVisible(true);
+			}
 
-					@Override
-					public void onSuccess(List<Message> result) {
-						updatingLabel.setVisible(false);
-						int position = 0;
-						for(Message m : result){
-							Label heading = new Label(m.getAuthor());
-							heading.addStyleName("messageHeading");
-							messagesPanel.insert(heading, position++);
-							Label body = new Label(m.getText());
-							body.addStyleName("messageBody");
-							messagesPanel.insert(body, position++);
-						}
-						if(!result.isEmpty()){
-							nextID = result.get(0).getId() + 1;
-						}
-					}
-			
+			@Override
+			public void onSuccess(List<Message> result) {
+				updatingLabel.setVisible(false);
+				int position = 0;
+				for(Message m : result){
+					Label heading = new Label(m.getAuthor());
+					heading.addStyleName("messageHeading");
+					messagesPanel.insert(heading, position++);
+					Label body = new Label(m.getText());
+					body.addStyleName("messageBody");
+					messagesPanel.insert(body, position++);
+					Label date = new Label("Posted at: " + m.getDate().toString());
+					date.addStyleName("messageDate");
+					messagesPanel.insert(date,position++);
+
+				} 
+				if(!result.isEmpty()){
+					nextID = result.get(0).getId() + 1;
+				}
+			}
+
 		});
 	}
 }

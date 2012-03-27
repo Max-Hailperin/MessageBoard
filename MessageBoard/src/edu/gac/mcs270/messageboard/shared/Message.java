@@ -7,6 +7,7 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import java.util.Date;
 
 /**
  * A contribution to the message board.
@@ -15,6 +16,9 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
 public class Message implements Serializable{
 	private static final long serialVersionUID = 1L;
+
+	@Persistent
+	private Date date;
 
 	@Persistent
 	private String author;
@@ -33,6 +37,7 @@ public class Message implements Serializable{
 	public Message(String author, String text) {
 		this.author = author;
 		this.text = text;
+		date = new Date();
 	}
 
 	/**
@@ -56,7 +61,16 @@ public class Message implements Serializable{
 		return id;
 	}
 	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 	// To keep DataNucleus happy we need this:
 	@SuppressWarnings("unused")
 	private Message(){}
+	
 }
