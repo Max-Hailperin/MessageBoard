@@ -37,10 +37,11 @@ MessageStore {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Query query = pm.newQuery(Message.class);
 		query.declareParameters("Long minimumID");
-		query.setFilter("id >= minimumID");
+		query.setFilter("id >= minimumID");//limit to new messages
 		query.setOrdering("id descending");
-		if(minimumID == 1){
-			query.setRange(0, MessageStore.INITIAL_LIMIT);
+		if(minimumID == 1)
+		{
+			query.setRange(0, MessageStore.INITIAL_LIMIT);//keeps initial updates fast.
 		}
 		@SuppressWarnings("unchecked")
 		List<Message> messages = (List<Message>) query.execute(minimumID);
