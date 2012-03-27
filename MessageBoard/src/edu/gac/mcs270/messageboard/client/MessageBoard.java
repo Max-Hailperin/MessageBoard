@@ -67,6 +67,8 @@ public class MessageBoard implements EntryPoint {
 		statusPanel.add(failureLabel);
 		mainPanel.add(statusPanel);
 		
+		
+		
 		messagesPanel = new VerticalPanel();
 		mainPanel.add(messagesPanel);
 		RootPanel.get("appContent").add(mainPanel);
@@ -136,6 +138,10 @@ public class MessageBoard implements EntryPoint {
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
+							Label date = new Label(m.getDate().toString());
+							date.addStyleName("messageBody");
+							messagesPanel.insert(date,position++);
+							
 						}
 						if(!result.isEmpty()){
 							nextID = result.get(0).getId() + 1;
