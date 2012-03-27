@@ -7,11 +7,14 @@ import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
-
+import java.util.Date;
 /**
  * A contribution to the message board.
  * @author max
  */
+
+
+
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
 public class Message implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -21,6 +24,9 @@ public class Message implements Serializable{
 
 	@Persistent
 	private String text;
+	
+	@Persistent
+	private Date date;
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -33,6 +39,7 @@ public class Message implements Serializable{
 	public Message(String author, String text) {
 		this.author = author;
 		this.text = text;
+		this.date = new Date();
 	}
 
 	/**
@@ -48,7 +55,11 @@ public class Message implements Serializable{
 	public String getText() {
 		return text;
 	}
-
+	
+	public Date getDate() {
+		return this.date;
+	}
+	
 	/**
 	 * @return the id of this Message
 	 */
