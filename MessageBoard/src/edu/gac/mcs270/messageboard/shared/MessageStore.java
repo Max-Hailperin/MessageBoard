@@ -26,6 +26,8 @@ public interface MessageStore extends RemoteService {
 	 */
 	List<Message> getMessages(Long minimumID);
 	
+	List<Message> getOldMessages(Long minID, Long maxID) throws Exception;
+	
 	/**
 	 * Limit on how far back into history initial retrievals go.
 	 */
