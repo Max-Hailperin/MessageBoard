@@ -54,8 +54,8 @@ public class Message implements Serializable{
 		return text;
 	}
 
-	public Date getDate(){
-		return date;
+	public String getDate(){
+		return date.toString();
 	}
 	/**
 	 * @return the id of this Message

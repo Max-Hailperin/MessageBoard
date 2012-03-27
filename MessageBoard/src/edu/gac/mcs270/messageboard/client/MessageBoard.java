@@ -21,7 +21,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * User interface for the message board.
@@ -77,7 +76,7 @@ public class MessageBoard implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				messageStore.storeMessage(
-						new Message(authorField.getText(), textField.getText(), //make a new date object here everytime),		
+						new Message(authorField.getText(), textField.getText(), new Date()),		
 						new AsyncCallback<Void>(){
 							@Override
 							public void onFailure(Throwable caught) {
@@ -136,6 +135,9 @@ public class MessageBoard implements EntryPoint {
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
+							Label date = new Label(m.getDate());
+							body.addStyleName("messageDate");
+							messagesPanel.insert(date, position++);
 						}
 						if(!result.isEmpty()){
 							nextID = result.get(0).getId() + 1;
