@@ -78,6 +78,7 @@ public class MessageBoard implements EntryPoint {
 						new Message(
 								authorField.getText(),
 								textField.getText()),
+								
 						new AsyncCallback<Void>(){
 							@Override
 							public void onFailure(Throwable caught) {
@@ -133,6 +134,11 @@ public class MessageBoard implements EntryPoint {
 							Label heading = new Label(m.getAuthor());
 							heading.addStyleName("messageHeading");
 							messagesPanel.insert(heading, position++);
+							
+							Label dateLabel = new Label(m.getDate().toString());
+							dateLabel.addStyleName("datePosted");
+							messagesPanel.insert(dateLabel, position++);
+							
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
