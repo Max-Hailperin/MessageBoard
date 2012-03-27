@@ -2,11 +2,13 @@ package edu.gac.mcs270.messageboard.shared;
 
 import java.io.Serializable;
 
+
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
+import java.util.*;
 
 /**
  * A contribution to the message board.
@@ -16,6 +18,9 @@ import javax.jdo.annotations.PrimaryKey;
 public class Message implements Serializable{
 	private static final long serialVersionUID = 1L;
 
+	@Persistent
+	private Date date;
+	
 	@Persistent
 	private String author;
 
@@ -33,8 +38,13 @@ public class Message implements Serializable{
 	public Message(String author, String text) {
 		this.author = author;
 		this.text = text;
+		this.date = new Date();
 	}
 
+	public Date getDate(){
+		return date;
+	}
+	
 	/**
 	 * @return the name of this Message's author
 	 */
