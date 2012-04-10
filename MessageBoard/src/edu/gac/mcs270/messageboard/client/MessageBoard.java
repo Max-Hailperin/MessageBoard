@@ -41,7 +41,6 @@ public class MessageBoard implements EntryPoint {
 	public void onModuleLoad() {
 		final VerticalPanel mainPanel = new VerticalPanel();
 		final HorizontalPanel entryPanel = new HorizontalPanel();
-		final HorizontalPanel footerPanel = new HorizontalPanel();
 		entryPanel.addStyleName("entryPanel");
 		mainPanel.add(entryPanel);
 		
@@ -58,8 +57,6 @@ public class MessageBoard implements EntryPoint {
 		final Button postButton = new Button("Post");
 		entryPanel.add(postButton);
 		
-		final Button moreButton = new Button("Older Messages");
-		footerPanel.add(moreButton);
 		
 		final HorizontalPanel statusPanel = new HorizontalPanel();
 		statusPanel.setHeight("3em");
@@ -72,7 +69,6 @@ public class MessageBoard implements EntryPoint {
 		mainPanel.add(statusPanel);
 		
 		messagesPanel = new VerticalPanel();
-		messagesPanel.add(footerPanel);
 		mainPanel.add(messagesPanel);
 		RootPanel.get("appContent").add(mainPanel);
 		
@@ -101,24 +97,6 @@ public class MessageBoard implements EntryPoint {
 			}
 		});
 		
-		moreButton.addClickHandler(new ClickHandler(){
-			@Override
-			public void onClick(ClickEvent event) {
-				
-				messageStore.getOldMessages(nextID - 11 - 10, nextID - 11, new AsyncCallback<List<Message>>(){
-					@Override
-					public void onFailure(Throwable caught) {
-						failureLabel.setVisible(true);
-					}
-
-					@Override
-					public void onSuccess(List<Message> result) {
-						failureLabel.setVisible(false);
-						updateMessages();
-					}
-				});
-			}
-		});
 		
 		updateMessages();
 		new Timer(){

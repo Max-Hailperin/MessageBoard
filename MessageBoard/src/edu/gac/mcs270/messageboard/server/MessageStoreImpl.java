@@ -48,22 +48,4 @@ MessageStore {
 		List<Message> messages = (List<Message>) query.execute(minimumID);
 		return new ArrayList<Message>(messages);
 	}
-	
-	public List<Message> getOldMessages(Long minID, Long maxID)  {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Query query = pm.newQuery(Message.class);
-		query.declareParameters("Long minID");
-		query.setFilter("((id >= minID) && (id < (minID + 10.0)))");
-		query.setOrdering("id descending");
-		if(minID < 0){
-			minID = 0L;
-		} //else if (minID > maxID) {
-			//throw new Exception("Error: minID cannot be greater than maxID");
-		//}
-		query.setRange(minID, minID + 10);
-		@SuppressWarnings("unchecked")
-		// Limit to new messages
-		List<Message> messages = (List<Message>) query.execute(minID);
-		return new ArrayList<Message>(messages);
-	}
 }

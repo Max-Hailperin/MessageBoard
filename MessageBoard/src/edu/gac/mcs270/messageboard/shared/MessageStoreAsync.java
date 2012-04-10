@@ -19,7 +19,6 @@ public interface MessageStoreAsync {
 	 */
 	void getMessages(Long minimumID, AsyncCallback<List<Message>> callback);
 	
-	void getOldMessages(Long minID, Long maxID, AsyncCallback<List<Message>> callback);
 
 	/**
 	 * 
