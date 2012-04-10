@@ -18,6 +18,7 @@ public interface MessageStoreAsync {
 	 * @see edu.gac.mcs270.messageboard.shared.MessageStore#getMessages(long)
 	 */
 	void getMessages(Long minimumID, AsyncCallback<List<Message>> callback);
+	
 
 	/**
 	 * 

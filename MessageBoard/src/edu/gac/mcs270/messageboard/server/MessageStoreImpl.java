@@ -40,9 +40,11 @@ MessageStore {
 		query.setFilter("id >= minimumID");
 		query.setOrdering("id descending");
 		if(minimumID == 1){
+			// Keeps initial updates fast
 			query.setRange(0, MessageStore.INITIAL_LIMIT);
 		}
 		@SuppressWarnings("unchecked")
+		// Limit to new messages
 		List<Message> messages = (List<Message>) query.execute(minimumID);
 		return new ArrayList<Message>(messages);
 	}

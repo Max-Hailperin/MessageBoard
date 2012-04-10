@@ -57,6 +57,7 @@ public class MessageBoard implements EntryPoint {
 		final Button postButton = new Button("Post");
 		entryPanel.add(postButton);
 		
+		
 		final HorizontalPanel statusPanel = new HorizontalPanel();
 		statusPanel.setHeight("3em");
 		updatingLabel = new Label("Updating...");
@@ -96,6 +97,7 @@ public class MessageBoard implements EntryPoint {
 			}
 		});
 		
+		
 		updateMessages();
 		new Timer(){
 			@Override
@@ -133,6 +135,9 @@ public class MessageBoard implements EntryPoint {
 							Label heading = new Label(m.getAuthor());
 							heading.addStyleName("messageHeading");
 							messagesPanel.insert(heading, position++);
+							Label date = new Label(m.getDate().toString());
+							date.addStyleName("messageDate");
+							messagesPanel.insert(date, position++);
 							Label body = new Label(m.getText());
 							body.addStyleName("messageBody");
 							messagesPanel.insert(body, position++);
