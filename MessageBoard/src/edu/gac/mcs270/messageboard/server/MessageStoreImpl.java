@@ -8,7 +8,6 @@ import edu.gac.mcs270.messageboard.shared.MessageStore;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -21,16 +20,9 @@ import javax.jdo.Query;
 public class MessageStoreImpl extends RemoteServiceServlet implements
 MessageStore {
 
-	private static final long serialVersionUID = 7367373321119740703L;
+	private static final long serialVersionUID = 2637409426426537753L;
 	
-	private static final PersistenceManagerFactory pmf =
-			JDOHelper.getPersistenceManagerFactory("transactions-optional");
-
-	@Override
-	public void storeMessage(Message msg) {
-		PersistenceManager pm = pmf.getPersistenceManager();
-		pm.makePersistent(msg);
-	}
+	private static final PersistenceManagerFactory pmf = PMF.get();
 
 	@Override
 	public List<Message> getMessages(Long minimumID) {

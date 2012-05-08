@@ -6,16 +6,11 @@ import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
 /**
- * The client-to-server interface for storing/retrieving messages.
+ * The client-to-server interface for retrieving messages.
  * @author max
  */
 @RemoteServiceRelativePath("MessageStore")
 public interface MessageStore extends RemoteService {
-	/**
-	 * Store a Message.
-	 * @param msg the Message to store
-	 */
-	public void storeMessage(Message msg);
 	
 	/**
 	 * Retrieve Messages.

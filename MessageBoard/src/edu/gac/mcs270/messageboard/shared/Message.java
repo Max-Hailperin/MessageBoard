@@ -14,13 +14,16 @@ import javax.jdo.annotations.PrimaryKey;
  */
 @PersistenceCapable(identityType=IdentityType.APPLICATION)
 public class Message implements Serializable{
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	@Persistent
 	private String author;
 
 	@Persistent
 	private String text;
+	
+	@Persistent
+	private String url;
 
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.IDENTITY)
@@ -29,10 +32,12 @@ public class Message implements Serializable{
 	/**
 	 * @param author the name of the Message's author
 	 * @param text the body of the Message
+	 * @param url the URL of the uploaded file
 	 */
-	public Message(String author, String text) {
+	public Message(String author, String text, String url) {
 		this.author = author;
 		this.text = text;
+		this.url = url;
 	}
 
 	/**
@@ -47,6 +52,13 @@ public class Message implements Serializable{
 	 */
 	public String getText() {
 		return text;
+	}
+
+	/**
+	 * @return the URL of the file uploaded with this Message
+	 */
+	public String getURL() {
+		return url;
 	}
 
 	/**
